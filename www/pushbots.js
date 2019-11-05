@@ -88,7 +88,8 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 * @param {callback} callback
 */
 PushbotsPlugin.prototype.on = function (eventName, callback) {
-	
+	console.log('PBTEST ON eventName '+JSON.stringify(eventName));
+	console.log('PBTEST ON callBack '+JSON.stringify(callback));
 	if (typeof callback !== 'function')
 		return;
 	
