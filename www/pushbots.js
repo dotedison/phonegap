@@ -88,8 +88,6 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 * @param {callback} callback
 */
 PushbotsPlugin.prototype.on = function (eventName, callback) {
-	console.log('PBTEST ON eventName '+JSON.stringify(eventName));
-	console.log('PBTEST ON callBack '+JSON.stringify(callback));
 	if (typeof callback !== 'function')
 		return;
 	
@@ -111,8 +109,6 @@ PushbotsPlugin.prototype.on = function (eventName, callback) {
 * @param {Object} data - data to handle on event execution
 */
 PushbotsPlugin.prototype.fire = function (eventName, data) {
-	console.log('PBTEST Fire eventNamt '+JSON.stringify(eventName));
-	console.log('PBTEST Fire data '+JSON.stringify(data));
 	if (this._events && this._events.hasOwnProperty(eventName)) {
 		var cbs = this._events[eventName];
 		for (var i = 0, len = cbs.length; i < len; i++) {
