@@ -52,7 +52,6 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 	
 	var that = this;
 	var success = function(data){
-		console.log('PBTEST '+JSON.stringify(data));
 		if (data && typeof data.type !== 'undefined') {
 			//Registration event
 			if(data.type === "registered"){
@@ -111,6 +110,8 @@ PushbotsPlugin.prototype.on = function (eventName, callback) {
 * @param {Object} data - data to handle on event execution
 */
 PushbotsPlugin.prototype.fire = function (eventName, data) {
+	console.log('PBTEST Fire eventNamt '+JSON.stringify(eventName));
+	console.log('PBTEST Fire data '+JSON.stringify(data));
 	if (this._events && this._events.hasOwnProperty(eventName)) {
 		var cbs = this._events[eventName];
 		for (var i = 0, len = cbs.length; i < len; i++) {
