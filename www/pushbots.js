@@ -52,6 +52,7 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 	
 	var that = this;
 	var success = function(data){
+		console.log('PBTEST '+JSON.stringify(data));
 		if (data && typeof data.type !== 'undefined') {
 			//Registration event
 			if(data.type === "registered"){
