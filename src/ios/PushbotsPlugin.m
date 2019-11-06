@@ -93,6 +93,7 @@ static char launchNotificationKey;
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo from:(NSString *)from{
+    NSLog(@"selfCallBackId: %@", self.callbackId);
     if (self.callbackId != nil) {
         NSLog(@"UIApplication: %@", [UIApplication sharedApplication].applicationState);
         NSLog(@"UIApplication Active: %@", UIApplicationStateActive);
