@@ -12,12 +12,16 @@ static char launchNotificationKey;
 @synthesize callbackId;
 
 - (void) initialize:(CDVInvokedUrlCommand*)command {
+    NSLog(@"PBTEST initial");
     [self.commandDelegate runInBackground:^{
         
         //Pushbots Application Id
         NSString* appId = [command.arguments objectAtIndex:0];
         
         self.callbackId = command.callbackId;
+
+        NSLog(@"PBTEST self:", self.callbackId);
+
         dispatch_async(dispatch_get_main_queue(), ^{
             //Ask for Push permission && create Pushbots sharedInstance
             [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:^(NSDictionary *result) {
@@ -93,7 +97,6 @@ static char launchNotificationKey;
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo from:(NSString *)from{
-    NSLog(@"PBTEST didRN:", self.callbackId);
     if (self.callbackId != nil) {
         if ( [UIApplication sharedApplication].applicationState != UIApplicationStateActive ) {
             self.notificationPayload = userInfo;
