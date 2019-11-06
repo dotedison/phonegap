@@ -24,9 +24,9 @@ static char launchNotificationKey;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             //Ask for Push permission && create Pushbots sharedInstance
-            NSLog(@"PBTEST Just Testing");
-            [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:nil openedNotification:^(NSDictionary *result) {
-                NSLog(@"PBTEST Noti Opened");
+            [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:^(NSDictionary *result) {
+                [self notificationOpened:result];
+            } openedNotification:^(NSDictionary *result) {
                 [self notificationOpened:result];
             }];
         });
