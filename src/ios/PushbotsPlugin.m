@@ -44,6 +44,7 @@ static char launchNotificationKey;
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"PBTEST didRegister", self.callbackId);
     if (self.callbackId != nil) {
         NSString *objectId = [[NSUserDefaults standardUserDefaults] valueForKey:@"com.pushbots.api.object_id"];
         // Send the event
@@ -85,6 +86,9 @@ static char launchNotificationKey;
     NSString *objectId = [defaults stringForKey:@"com.pushbots.api.object_id"];
     NSString *token = [defaults stringForKey:@"com.pushbots.api.deviceID"];
     
+    NSLog(@"PBTEST registered object", objectId);
+    NSLog(@"PBTEST registered token", token);
+
     if(objectId != nil && token != nil){
         NSMutableDictionary* responseDict = [NSMutableDictionary dictionaryWithCapacity:2];
         [responseDict setObject:@"user" forKey:@"type"];
@@ -600,9 +604,8 @@ static char launchNotificationKey;
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
-    NSLog(@"PBTEST applicationDidBecomeActive");
     PushbotsPlugin *pushHandler = [self getCommandInstance:@"PushbotsPlugin"];
-    
+    NSLog(@"PBTEST self: ", self.launchNotification);
     if (self.launchNotification) {
         pushHandler.notificationPayload = [self.launchNotification copy];
         self.launchNotification = nil;
