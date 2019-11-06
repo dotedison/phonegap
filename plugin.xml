@@ -70,7 +70,7 @@
 		   </feature>
 	   </config-file>
 
-	   <config-file target="*/Info.plist" parent="UIBackgroundModes">
+	   <config-file target="*-Info.plist" parent="UIBackgroundModes">
 		   <array>
 			   <string>remote-notification</string>
 		   </array>
