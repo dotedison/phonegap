@@ -18,11 +18,10 @@ static char launchNotificationKey;
         NSString* appId = [command.arguments objectAtIndex:0];
         
         self.callbackId = command.callbackId;
-
         dispatch_async(dispatch_get_main_queue(), ^{
             //Ask for Push permission && create Pushbots sharedInstance
             [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:^(NSDictionary *result) {
-                [self notificationOpened:result];
+                 NSLog(@"receivedNotification: %@", result);
             } openedNotification:^(NSDictionary *result) {
                 [self notificationOpened:result];
             }];
@@ -41,7 +40,6 @@ static char launchNotificationKey;
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"PBTEST didRegister", self.callbackId);
     if (self.callbackId != nil) {
         NSString *objectId = [[NSUserDefaults standardUserDefaults] valueForKey:@"com.pushbots.api.object_id"];
         // Send the event
@@ -83,9 +81,6 @@ static char launchNotificationKey;
     NSString *objectId = [defaults stringForKey:@"com.pushbots.api.object_id"];
     NSString *token = [defaults stringForKey:@"com.pushbots.api.deviceID"];
     
-    NSLog(@"PBTEST registered object", objectId);
-    NSLog(@"PBTEST registered token", token);
-
     if(objectId != nil && token != nil){
         NSMutableDictionary* responseDict = [NSMutableDictionary dictionaryWithCapacity:2];
         [responseDict setObject:@"user" forKey:@"type"];
@@ -560,7 +555,6 @@ static char launchNotificationKey;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:( void (^)(UIBackgroundFetchResult))completionHandler;{
-    NSLog(@"PBTEST didReceiveRemoteNotification");
     if (application.applicationState == UIApplicationStateActive) {
         PushbotsPlugin *pushHandler = [self getCommandInstance:@"PushbotsPlugin"];
         [pushHandler didReceiveRemoteNotification:userInfo from:@"foreground"];
@@ -602,7 +596,7 @@ static char launchNotificationKey;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     PushbotsPlugin *pushHandler = [self getCommandInstance:@"PushbotsPlugin"];
-    NSLog(@"PBTEST self: ", self.launchNotification);
+    
     if (self.launchNotification) {
         pushHandler.notificationPayload = [self.launchNotification copy];
         self.launchNotification = nil;

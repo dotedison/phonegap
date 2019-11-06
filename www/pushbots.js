@@ -28,18 +28,19 @@ var PushbotsPlugin = function() {};
 * @see {@link https://pushbots.com/../../#Options}
 */
 PushbotsPlugin.prototype.initialize = function(app_id, options) {
+	
 	if(!this._events)
 		this._events = {};
 
 	/* VALIDATE APP_ID */
 	// Pushbots Application ID is required
 	if (typeof app_id === 'undefined') {
-		console.log('app_id argument is required.');
+		console.error('app_id argument is required.');
 	}
 
 	var checkForAppId = new RegExp("^[0-9a-fA-F]{24}$");
 	if (!checkForAppId.test(app_id)) {
-		console.log('app_id argument is not valid.');
+		console.error('app_id argument is not valid.');
 	}
 
 	this.app_id = app_id;
@@ -51,7 +52,6 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 	
 	var that = this;
 	var success = function(data){
-		console.log('PBTEST success:', JSON.stringify(data));
 		if (data && typeof data.type !== 'undefined') {
 			//Registration event
 			if(data.type === "registered"){
@@ -75,7 +75,7 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 	};
 	
 	var fail = function(error){
-		console.log('PBTEST error: ', JSON.stringify(error));
+		console.error(error);
 	};
     //Intialize Pushbots
 	exec(success, fail, SERVICE_TITLE, 'initialize', [this.app_id, this.options]);
@@ -88,6 +88,7 @@ PushbotsPlugin.prototype.initialize = function(app_id, options) {
 * @param {callback} callback
 */
 PushbotsPlugin.prototype.on = function (eventName, callback) {
+	
 	if (typeof callback !== 'function')
 		return;
 	

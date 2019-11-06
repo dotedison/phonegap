@@ -93,6 +93,7 @@ typedef void (^PushBotsRegistered)(NSString * userid);
  @param p      Push notification prompt on first app open.
  @param rCallback    block to access notification data on received.
  */
++ (id)initWithAppId:(NSString*)appId withLaunchOptions:(NSDictionary *)launchOptions prompt:(BOOL)p receivedNotification:(PushBotsReceivedNotification)rCallback;
 
 
 + (void)notificationReceived:(NSDictionary*)messageDict;
