@@ -12,7 +12,6 @@ static char launchNotificationKey;
 @synthesize callbackId;
 
 - (void) initialize:(CDVInvokedUrlCommand*)command {
-    NSLog(@"PBTEST initial");
     [self.commandDelegate runInBackground:^{
         
         //Pushbots Application Id
@@ -20,13 +19,9 @@ static char launchNotificationKey;
         
         self.callbackId = command.callbackId;
 
-        NSLog(@"PBTEST self:", self.callbackId);
-
         dispatch_async(dispatch_get_main_queue(), ^{
             //Ask for Push permission && create Pushbots sharedInstance
-            [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:^(NSDictionary *result) {
-                [self notificationOpened:result];
-            } openedNotification:^(NSDictionary *result) {
+            [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:nil openedNotification:^(NSDictionary *result) {
                 [self notificationOpened:result];
             }];
         });
