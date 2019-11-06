@@ -28,7 +28,8 @@ var PushbotsPlugin = function() {};
 * @see {@link https://pushbots.com/../../#Options}
 */
 PushbotsPlugin.prototype.initialize = function(app_id, options) {
-	console.log('PBTEST js initialize');
+	console.log('PBTEST js app_id: ', JSON.stringify(app_id));
+	console.log('PBTEST js options: ', JSON.stringify(options));
 	if(!this._events)
 		this._events = {};
 
