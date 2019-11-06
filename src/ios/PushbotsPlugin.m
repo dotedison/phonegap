@@ -93,6 +93,7 @@ static char launchNotificationKey;
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo from:(NSString *)from{
+    NSLog(@"PBTEST didRN:", self.callbackId);
     if (self.callbackId != nil) {
         if ( [UIApplication sharedApplication].applicationState != UIApplicationStateActive ) {
             self.notificationPayload = userInfo;
