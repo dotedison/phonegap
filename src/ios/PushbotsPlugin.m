@@ -559,6 +559,7 @@ static char launchNotificationKey;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:( void (^)(UIBackgroundFetchResult))completionHandler;{
+    NSLog(@"PBTEST didReceiveRemoteNotification");
     if (application.applicationState == UIApplicationStateActive) {
         PushbotsPlugin *pushHandler = [self getCommandInstance:@"PushbotsPlugin"];
         [pushHandler didReceiveRemoteNotification:userInfo from:@"foreground"];
@@ -599,6 +600,7 @@ static char launchNotificationKey;
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
+    NSLog(@"PBTEST applicationDidBecomeActive");
     PushbotsPlugin *pushHandler = [self getCommandInstance:@"PushbotsPlugin"];
     
     if (self.launchNotification) {
