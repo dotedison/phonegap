@@ -26,6 +26,7 @@ static char launchNotificationKey;
             //Ask for Push permission && create Pushbots sharedInstance
             NSLog(@"PBTEST Just Testing");
             [Pushbots initWithAppId:appId withLaunchOptions:nil prompt:true receivedNotification:nil openedNotification:^(NSDictionary *result) {
+                NSLog(@"PBTEST Noti Opened");
                 [self notificationOpened:result];
             }];
         });
